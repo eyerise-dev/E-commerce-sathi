@@ -1,6 +1,7 @@
 {
-  "name": "my-project",
-  "version": "0.1.0",
+  "name": "e-commerce-sathi",
+  "version": "1.0.0",
+  "description": "E-commerce Sathi - Your reliable e-commerce partner",
   "private": true,
   "scripts": {
     "dev": "next dev",
