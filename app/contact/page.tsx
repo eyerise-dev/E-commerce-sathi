@@ -9,9 +9,16 @@ export default function ContactPage() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setStatus('sending')
+
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
+    if (!accessKey) {
+      setStatus('error')
+      return
+    }
+
     const form = event.currentTarget
     const data = new FormData(form)
-    data.append('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? '')
+    data.append('access_key', accessKey)
     data.append('subject', 'New E-Commerce Sathi enquiry')
     data.append('from_name', 'E-Commerce Sathi website')
 
@@ -29,12 +36,14 @@ export default function ContactPage() {
   return (
     <main className="contact-page">
       <header className="site-header contact-header">
-        <a href="/" className="brand-mark" aria-label="E-Commerce Sathi home"><span className="brand-symbol"><HandshakeMark /></span><span><strong>E-Commerce</strong> <em>Sathi</em></span></a>
+        <a href="/" className="site-logo" aria-label="Home">
+          <img src="/translogo.png" alt="Translogo" />
+        </a>
         <a className="header-cta" href="/">Back to home <ArrowUpRight size={16} /></a>
       </header>
       <section className="contact-page-hero section-shell">
         <div className="contact-page-copy">
-          <a className="back-link" href="/"><ArrowLeft size={15} /> Back to E-Commerce Sathi</a>
+          <a className="back-link" href="/"><ArrowLeft size={15} /> Back to home</a>
           <p className="section-kicker">04 / LET&apos;S WORK TOGETHER</p>
           <h1>Let&apos;s grow your<br /><span>marketplace.</span></h1>
           <p>Tell us a little about your business and marketplace setup. Our team will get back to you with the right next step.</p>
@@ -50,9 +59,7 @@ export default function ContactPage() {
           {status === 'error' && <p className="form-message error">Something went wrong. Please email us directly at rahulpandeyji424@gmail.com.</p>}
         </form>
       </section>
-      <footer className="contact-page-footer section-shell"><span>A unit of Eyerise</span><span>© 2026 E-Commerce Sathi</span><span>Terms &amp; conditions apply.</span></footer>
+      <footer className="contact-page-footer section-shell"><span>© 2026</span><span>Terms &amp; conditions apply.</span></footer>
     </main>
   )
 }
-
-function HandshakeMark() { return <svg viewBox="0 0 96 70" aria-hidden="true"><path d="M11 18 23 6l17 4 10 9-8 7-9-4-7 8 15 12c4 3 9 3 12-1l7-8"/><path d="m85 18-12-12-17 4-10 9 8 7 9-4 7 8-15 12c-4 3-9 3-12-1l-7-8"/><path d="m28 34 14 13c3 3 7 3 10 0l6-6 4 4c3 3 7 3 10 0l8-8"/><path d="m40 43 6 6c3 3 7 3 10 0l5-5"/></svg> }

@@ -9,11 +9,19 @@ export default function ContactForm() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setStatus('sending')
+
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
+    if (!accessKey) {
+      setStatus('error')
+      return
+    }
+
     const form = event.currentTarget
     const data = new FormData(form)
-    data.append('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? '')
+    data.append('access_key', accessKey)
     data.append('subject', 'New E-Commerce Sathi enquiry')
     data.append('from_name', 'E-Commerce Sathi website')
+
     try {
       const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
       const result = await response.json()

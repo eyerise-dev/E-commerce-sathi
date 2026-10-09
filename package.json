@@ -4,7 +4,7 @@
   "description": "E-commerce Sathi - Your reliable e-commerce partner",
   "private": true,
   "scripts": {
-    "dev": "Sandeep",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },

@@ -1,11 +1,14 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
   title: 'E-Commerce Sathi | Digital Marketplace Insiders',
-  description: 'E-Commerce Sathi helps marketplace sellers scale with expert cataloging, inventory, account health, compliance, and ROI-driven ads.',
-  generator: 'v0.app',
+  description: 'E-Commerce Sathi helps marketplace businesses scale with expert cataloging, inventory, account health, compliance, and ROI-driven ads.',
+  icons: {
+    icon: '/favicon-circle.png',
+    shortcut: '/favicon-circle.png',
+    apple: '/favicon-circle.png',
+  },
 }
 
 export const viewport: Viewport = {
@@ -25,7 +28,6 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
